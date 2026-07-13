@@ -141,7 +141,7 @@ https://walruscan.com/mainnet/blob/<blob-id>
 
 ## Prompt
 
-The full system prompt Rugmind runs on: [`prompt/rugmind.prompt.md`](./rugmind.prompt.md)
+The full system prompt Rugmind runs on: [`prompt/rugmind.prompt.md`](./prompt/rugmind.prompt.md)
 
 ### What It Does
 
