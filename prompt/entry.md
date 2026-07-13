@@ -45,3 +45,9 @@ Full text: [`rugmind.prompt.md`](./rugmind.prompt.md)
 
 
 - **Explorer (account object):** [View on Walrus Memory Explorer](https://memory.walrus.xyz/accounts/0xc41b5c949159146b7a0a74d973bcd61c5cb5f946b66bfe610b894277a6138f39)
+
+
+## Agent Verification
+
+- **MEMWAL_AGENT_ID:** `a20a6c4d9567dc3eed25f92e4ea2a5b502e3ab450b0d5996e862b698634759eb`
+- **On-chain object:** https://suiscan.xyz/mainnet/object/0xc41b5c949159146b7a0a74d973bcd61c5cb5f946b66bfe610b894277a6138f39

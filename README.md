@@ -139,6 +139,19 @@ Copy any blob ID printed by the agent and open:
 https://walruscan.com/mainnet/blob/<blob-id>
 ```
 
+## Prompt
+
+The full system prompt Rugmind runs on: [`prompt/rugmind.prompt.md`](./rugmind.prompt.md)
+
+### What It Does
+
+Rugmind checks Walrus Memory the instant a wallet address appears in conversation, before responding to anything else — if the wallet was flagged before, it leads with what was flagged, when, and why. The moment the user reports a scam, a suspicious funding link, or a trust signal, it writes that as a structured memory immediately, without being asked. New flags are automatically checked against everything already stored, so a hidden connection between two separately flagged wallets gets surfaced on its own. Nothing is ever deleted — a disputed flag gets a new entry instead, so the full history stays intact and recallable.
+
+## Agent Verification
+
+- **MEMWAL_AGENT_ID:** `a20a6c4d9567dc3eed25f92e4ea2a5b502e3ab450b0d5996e862b698634759eb`
+- **On-chain object:** https://suiscan.xyz/mainnet/object/0xc41b5c949159146b7a0a74d973bcd61c5cb5f946b66bfe610b894277a6138f39
+
 ## License
 
 MIT
