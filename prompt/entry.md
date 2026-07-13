@@ -28,7 +28,7 @@ Every flag is written to **Walrus mainnet** and returns a blob ID you can verify
 
 - TypeScript / Node.js
 - Walrus Memory SDK (`@mysten-incubation/memwal`) — mainnet
-- Claude (Anthropic) via Vercel AI SDK for the chat loop
+- LLM via OpenRouter (Vercel AI SDK) for the chat loop
 - dotenv for configuration
 
 ## The Prompt
@@ -37,6 +37,11 @@ Full text: [`rugmind.prompt.md`](./rugmind.prompt.md)
 
 ## Proof of Usage
 
-- **Agent ID:** `[fill in from memory.walrus.xyz dashboard]`
-- **Blob count:** `[fill in from npx tsx list-memories.ts wallet]`
-- **Sample verified blob:** `https://walruscan.com/mainnet/blob/[fill in blob ID]`
+- **Account ID:** `0xc41b5c949159146b7a0a74d973bcd61c5cb5f946b66bfe610b894277a6138f39`
+
+- **Verified blobs on mainnet:**
+  - `Y6q3iSYG1v5E7UNnFEpohzWn_k2nfsE0YW_FRSlCOds` — [Verify on Walruscan](https://walruscan.com/mainnet/blob/Y6q3iSYG1v5E7UNnFEpohzWn_k2nfsE0YW_FRSlCOds)
+- **Sample flag stored:** `[FLAG] 0xAAAA9999BBBB8888CCCC7777DDDD6666EEEE5555 — rug pull - Project FakeYield vanished with 50k USDC in July 2026`
+
+
+- **Explorer (account object):** [View on Walrus Memory Explorer](https://memory.walrus.xyz/accounts/0xc41b5c949159146b7a0a74d973bcd61c5cb5f946b66bfe610b894277a6138f39)

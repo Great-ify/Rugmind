@@ -13,9 +13,9 @@
     "list": "npx tsx list-memories.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "^4.0.0",
-    "@ai-sdk/google": "^4.0.12",
     "@mysten-incubation/memwal": "^0.0.7",
+    "@mysten/seal": "^1.3.0",
+    "@mysten/sui": "^2.20.3",
     "@openrouter/ai-sdk-provider": "^3.0.0",
     "ai": "^7.0.15",
     "dotenv": "^17.4.2",

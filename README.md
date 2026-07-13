@@ -39,25 +39,25 @@ Every flag is written to **Walrus mainnet** and returns a blob ID you can verify
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                     Terminal (you)                       │
-│                        ▲    │                            │
-│                        │    ▼                            │
+│                        ^    │                            │
+│                        │    v                            │
 │  ┌──────────────── index.ts ───────────────────────┐    │
 │  │                                                  │    │
-│  │   readline loop ◄──► Claude (Anthropic API)      │    │
+│  │   readline loop <──> LLM (via OpenRouter)        │    │
 │  │                        │                         │    │
 │  │                  tool dispatch                    │    │
 │  │           ┌────────┼────────┐                    │    │
-│  │           ▼        ▼        ▼                    │    │
+│  │           v        v        v                    │    │
 │  │      flag_wallet  check_*  analyze_bulk          │    │
 │  │      flag_circle                                 │    │
 │  │           │        │        │                    │    │
 │  └───────────┼────────┼────────┼────────────────────┘    │
-│              ▼        ▼        ▼                         │
+│              v        v        v                         │
 │        ┌─────────────────────────────┐                   │
 │        │   MemWal SDK (remember /    │                   │
 │        │   recall / analyze)         │                   │
 │        └────────────┬────────────────┘                   │
-│                     ▼                                    │
+│                     v                                    │
 │        ┌─────────────────────────────┐                   │
 │        │   Walrus Mainnet            │                   │
 │        │   (blob storage)            │                   │
@@ -65,10 +65,10 @@ Every flag is written to **Walrus mainnet** and returns a blob ID you can verify
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Data flow:** User message &rarr; Claude decides which tool(s) to call &rarr;
-tool executes a real MemWal SDK operation &rarr; SDK writes/reads an encrypted
-blob on Walrus mainnet via the relayer &rarr; blob ID is printed to the terminal
-and returned to Claude for its response.
+**Data flow:** User message → LLM decides which tool(s) to call →
+tool executes a real MemWal SDK operation → SDK writes/reads an encrypted
+blob on Walrus mainnet via the relayer → blob ID and verification link are
+printed to the terminal and returned to the LLM for its response.
 
 **Namespaces:** Each wallet gets its own namespace (`wallet:{address}`) so
 flags are scoped per-address. Shared circles (`circle:{name}`) are created
@@ -81,13 +81,13 @@ only on explicit opt-in.
 | `index.ts` | Chat loop, tool definitions, MemWal client init |
 | `list-memories.ts` | Standalone dump of stored memories for verification |
 | `prompt/rugmind.prompt.md` | System prompt loaded at runtime (not hardcoded) |
-| `prompt/entry.md` | Submission writeup with proof-of-usage placeholders |
+| `prompt/entry.md` | Submission writeup with proof-of-usage |
 | `.mcp.json` | MCP server config for the MemWal stdio transport |
 
 ## Quick Start
 
 ```bash
-# 1. Clone / create folder
+# 1. Clone
 git clone <repo-url> rugmind && cd rugmind
 
 # 2. Install dependencies
@@ -99,10 +99,10 @@ cp .env.example .env
 #   MEMWAL_PRIVATE_KEY   — delegate key from https://memory.walrus.xyz
 #   MEMWAL_ACCOUNT_ID    — account ID from the same dashboard
 #   MEMWAL_SERVER_URL    — https://relayer.memory.walrus.xyz (mainnet)
-#   ANTHROPIC_API_KEY    — your Anthropic API key
+#   OPENROUTER_API_KEY   — free key from https://openrouter.ai/keys
 
 # 4. Run the agent
-npx tsx index.ts
+npm start
 ```
 
 ## Usage
@@ -116,7 +116,7 @@ you> Create a circle called "defi-watchers" and flag 0xABC... there
 you> Analyze this list of addresses from etherscan: 0x123..., 0x456..., 0x789...
 ```
 
-Every write prints a blob ID to the terminal. Every recall shows what came back from Walrus Memory.
+Every write prints a blob ID and a verification link. Every recall shows what came back from Walrus Memory.
 
 ## Listing All Stored Memories
 

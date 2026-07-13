@@ -1,4 +1,3 @@
-
 import "dotenv/config";
 import { MemWal } from "@mysten-incubation/memwal";
 import { generateText, isStepCount } from "ai";
@@ -71,7 +70,9 @@ async function withRetry<T>(fn: () => Promise<T>, retries = 2): Promise<T> {
   }
 }
 
-// ── Tool definitions ───────────────────────────────────────────────
+// ── Constants ─────────────────────────────────────────────────────
+
+const WALRUS_EXPLORER = "https://walruscan.com/mainnet/blob";
 
 const tools = {
   flag_wallet: tool({
@@ -93,8 +94,10 @@ const tools = {
         const job = await withRetry(() => memwal.remember(text, ns));
         const confirmation = await memwal.waitForRememberJob(job.job_id);
         const blobId = confirmation.blob_id ?? "(pending)";
+        const verifyUrl = `${WALRUS_EXPLORER}/${blobId}`;
         console.log(`\n📝 Written: ${ns} → blob ${blobId}`);
-        return { status: "stored", namespace: ns, blob_id: blobId };
+        console.log(`   🔗 Verify: ${verifyUrl}`);
+        return { status: "stored", namespace: ns, blob_id: blobId, verify_url: verifyUrl };
       } catch (err: any) {
         console.error(`\n❌ flag_wallet failed for ${ns}:`);
         console.error(`   Message: ${err.message}`);
@@ -127,11 +130,13 @@ const tools = {
         const memories = result.results.map((r: any) => ({
           text: r.text,
           blob_id: r.blob_id ?? "unknown",
+          verify_url: r.blob_id ? `${WALRUS_EXPLORER}/${r.blob_id}` : undefined,
         }));
         if (memories.length) {
-          memories.forEach((m: any) =>
-            console.log(`   - "${m.text}" (blob: ${m.blob_id})`),
-          );
+          memories.forEach((m: any) => {
+            console.log(`   - "${m.text}" (blob: ${m.blob_id})`);
+            if (m.verify_url) console.log(`     🔗 ${m.verify_url}`);
+          });
         } else {
           console.log("   (no flags found)");
         }
@@ -163,8 +168,10 @@ const tools = {
         const job = await withRetry(() => memwal.remember(flag, ns));
         const confirmation = await memwal.waitForRememberJob(job.job_id);
         const blobId = confirmation.blob_id ?? "(pending)";
+        const verifyUrl = `${WALRUS_EXPLORER}/${blobId}`;
         console.log(`\n📝 Written: ${ns} → blob ${blobId}`);
-        return { status: "stored", namespace: ns, blob_id: blobId };
+        console.log(`   🔗 Verify: ${verifyUrl}`);
+        return { status: "stored", namespace: ns, blob_id: blobId, verify_url: verifyUrl };
       } catch (err: any) {
         console.error(`\n❌ flag_circle failed for ${ns}:`);
         console.error(`   Message: ${err.message}`);
@@ -193,11 +200,13 @@ const tools = {
         const memories = result.results.map((r: any) => ({
           text: r.text,
           blob_id: r.blob_id ?? "unknown",
+          verify_url: r.blob_id ? `${WALRUS_EXPLORER}/${r.blob_id}` : undefined,
         }));
         if (memories.length) {
-          memories.forEach((m: any) =>
-            console.log(`   - "${m.text}" (blob: ${m.blob_id})`),
-          );
+          memories.forEach((m: any) => {
+            console.log(`   - "${m.text}" (blob: ${m.blob_id})`);
+            if (m.verify_url) console.log(`     🔗 ${m.verify_url}`);
+          });
         } else {
           console.log("   (no flags found)");
         }
