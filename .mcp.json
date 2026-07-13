@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "memwal": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@mysten-incubation/memwal-mcp"],
+      "env": {}
+    }
+  }
+}

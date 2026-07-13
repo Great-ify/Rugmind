@@ -1,0 +1,39 @@
+{
+  "name": "rugmind",
+  "version": "1.0.0",
+  "description": "CLI agent that gives crypto users persistent memory of scam/rug wallet flags, built on Walrus Memory",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "rugmind": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "npx tsx index.ts",
+    "list": "npx tsx list-memories.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.0",
+    "@ai-sdk/google": "^4.0.12",
+    "@mysten-incubation/memwal": "^0.0.7",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.15",
+    "dotenv": "^17.4.2",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3"
+  },
+  "keywords": [
+    "walrus",
+    "memwal",
+    "crypto",
+    "scam",
+    "rug",
+    "memory",
+    "cli"
+  ],
+  "license": "MIT"
+}
